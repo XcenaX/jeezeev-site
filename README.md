@@ -7,9 +7,9 @@
 
 ## Preview
 
-![Desktop preview](./assets/screenshots/desktop-home.png)
+![Desktop preview](./assets/screenshots/1.png)
 
-![Mobile preview](./assets/screenshots/mobile-home.png)
+![Mobile preview](./assets/screenshots/2.png)
 
 ## Stack
 
