@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GlitchText, cn } from './GlitchText';
 
@@ -12,6 +12,8 @@ export default function Hero() {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isTriggered, setIsTriggered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -32,16 +34,36 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [isTriggered]);
 
+  useEffect(() => {
+    return () => {
+      if (scrollTimeoutRef.current !== null) {
+        window.clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleTrigger = () => {
+    if (isTriggered) return;
+
     setIsTriggered(true);
-    // Trigger some global state or just local visual chaos
+
     setTimeout(() => {
       setIsTriggered(false);
     }, 2000);
+
+    scrollTimeoutRef.current = window.setTimeout(() => {
+      const nextSection = sectionRef.current?.nextElementSibling;
+      if (nextSection instanceof HTMLElement) {
+        nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 3000);
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4"
+    >
       {/* Background elements reacting to mouse */}
       <motion.div 
         className="absolute inset-0 opacity-20 pointer-events-none"

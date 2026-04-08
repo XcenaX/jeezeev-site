@@ -28,7 +28,7 @@ const types = [
   {
     id: "chaos",
     name: "Chaos Mode",
-    desc: "Уже не реагирует на реальность, а ломает её.",
+    desc: "Не реагирует на реальность, а ломает её.",
     style: "border-transparent text-white bg-black mix-blend-screen",
     font: "font-display font-black uppercase tracking-widest",
     isChaos: true
