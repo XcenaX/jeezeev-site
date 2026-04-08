@@ -56,7 +56,7 @@ export default function Hero() {
       if (nextSection instanceof HTMLElement) {
         nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 3000);
+    }, 2000);
   };
 
   return (
