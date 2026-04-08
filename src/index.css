@@ -20,6 +20,17 @@
   }
 }
 
+@media (hover: none), (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+
+  .interactive,
+  .cursor-none {
+    cursor: auto !important;
+  }
+}
+
 /* Glitch effects and animations */
 .glitch-text {
   position: relative;

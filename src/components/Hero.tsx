@@ -12,10 +12,32 @@ export default function Hero() {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isTriggered, setIsTriggered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isFinePointer, setIsFinePointer] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const scrollTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const updatePointerMode = (event?: MediaQueryListEvent) => {
+      const nextIsFinePointer = event?.matches ?? mediaQuery.matches;
+      setIsFinePointer(nextIsFinePointer);
+
+      if (!nextIsFinePointer) {
+        setMousePos({ x: 0, y: 0 });
+      }
+    };
+
+    updatePointerMode();
+    mediaQuery.addEventListener('change', updatePointerMode);
+
+    return () => {
+      mediaQuery.removeEventListener('change', updatePointerMode);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isFinePointer) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({
         x: (e.clientX / window.innerWidth - 0.5) * 20,
@@ -24,7 +46,7 @@ export default function Hero() {
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [isFinePointer]);
 
   useEffect(() => {
     if (isTriggered) return;
