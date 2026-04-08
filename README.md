@@ -2,6 +2,9 @@
 
 Промо-сайт в формате экспериментального реактивного лонгрида про архетип "JEEZEEV". Проект собран на `React + TypeScript + Vite`, использует `framer-motion` и акцентируется на глитч-эстетике, типографике и кинематографичных переходах.
 
+- Live: https://jeezeev-site.vercel.app
+- GitHub: https://github.com/XcenaX/jeezeev-site
+
 ## Preview
 
 ![Desktop preview](./assets/screenshots/desktop-home.png)
